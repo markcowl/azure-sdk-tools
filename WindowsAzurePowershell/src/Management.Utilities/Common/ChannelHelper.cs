@@ -126,6 +126,14 @@ namespace Microsoft.WindowsAzure.Management.Utilities.Common
                 factory.Credentials.UserName.Password = password;
             }
 
+            wb.MaxReceivedMessageSize = int.MaxValue;
+            wb.MaxBufferSize = int.MaxValue;
+            wb.ReaderQuotas.MaxArrayLength = int.MaxValue;
+            wb.ReaderQuotas.MaxBytesPerRead = int.MaxValue;
+            wb.ReaderQuotas.MaxDepth = int.MaxValue;
+            wb.ReaderQuotas.MaxNameTableCharCount = int.MaxValue;
+            wb.ReaderQuotas.MaxStringContentLength = int.MaxValue;
+
             return factory.CreateChannel();
         }
 
