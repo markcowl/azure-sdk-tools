@@ -53,7 +53,7 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest.WebsitesTests
         [TestCategory(Category.WAPack)]
         public void TestRemoveAzureWebsiteWithInvalidCredentials()
         {
-            RunPowerShellTest("Test-WithInvalidCredentials {Remove-AzureWebsite $(Get-WebsiteName) }");
+            RunPowerShellTest("Test-WithInvalidCredentials {Remove-AzureWebsite $(Get-WebsiteName) -Force }");
         }
 
         [TestMethod]

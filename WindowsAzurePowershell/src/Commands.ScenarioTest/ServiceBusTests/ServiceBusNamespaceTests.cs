@@ -215,14 +215,6 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest.ServiceBusTests
             RunPowerShellTest("Test-RemoveAzureSBNamespaceWhatIf");
         }
 
-        [TestMethod]
-        [TestCategory(Category.All)]
-        [TestCategory(Category.ServiceBus)]
-        public void TestRemoveAzureSBNamespaceWhatIfError()
-        {
-            RunPowerShellTest("Test-RemoveAzureSBNamespaceWhatIfError");
-        }
-
         #endregion
 
         #region General Service Bus Scenario Tests

@@ -51,6 +51,47 @@ function Assert-Throws
   throw "No exception occured";
 }
 
+######################
+#
+# Validate that the given code block throws the given exception
+#
+#    param [ScriptBlock] $script : The code to test
+#    param [string] $message     : The text of the exception that should be thrown
+#######################
+function Assert-ThrowsContent
+{
+  param([ScriptBlock] $script, [ScriptBlock] $comparer)
+  try 
+  {
+    &$script
+  }
+  catch 
+  {
+    if ($comparer -ne $null) 
+    {
+      $exception = $_.Exception;
+          $message = $exception.Message;
+      Write-Output ("Caught exception: '$message'");
+          $result = Invoke-Command -ScriptBlock $comparer -ArgumentList $exception;
+      if ($result -eq $true)
+      {
+        return $true;
+      }
+      else
+      {
+        throw "Expected exception not received";
+      }
+        }
+        else
+        {
+          return $true
+        }
+  }
+
+
+  throw "No exception occured";
+}
+
 ###################
 #
 # Verify that the given scriptblock returns true
