@@ -25,6 +25,7 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest.StorageTests
         {
         }
 
+
         /// <summary>
         /// Set up storage account for container tests
         /// </summary>
@@ -45,6 +46,7 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest.StorageTests
             powershell.Invoke();
             base.TestCleanup();
         }
+
 
         [TestMethod]
         [TestCategory(Category.All)]

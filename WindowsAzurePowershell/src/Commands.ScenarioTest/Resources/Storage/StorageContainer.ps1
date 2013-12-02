@@ -18,6 +18,7 @@ $global:createdStorageAccounts = New-Object "System.Collections.Generic.List``1[
 
 <#
 .SYNOPSIS
+<<<<<<< HEAD
 Gets valid and available storage service name.
 #>
 function New-StorageServiceName
@@ -165,11 +166,10 @@ function Cleanup-StorageCredentials
 
 <#
 .SYNOPSIS
-Lists existing storage containers
+Tests using Get-AzureStorageContainer without container name.
 #>
 function Test-GetAzureStorageContainerWithoutContainerName
 {
-    
     $containers = Get-AzureStorageContainer; 
     Assert-True {$containers.Count -ge 1};
     $container =  $containers | ? {$_.Name -eq $containerName}
