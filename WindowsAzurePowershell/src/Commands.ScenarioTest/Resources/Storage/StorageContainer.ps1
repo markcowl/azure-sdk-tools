@@ -24,11 +24,11 @@ function New-StorageServiceName
 {
 	do
 	{
-		$name = "onesdk" + (Get-Random).ToString()
-		$used = Test-AzureName -Storage $name
+		$name = "onesdk" + (Get-Random).ToString();
+		$used = Test-AzureName -Storage $name;
 	} while ($used)
 
-	$name
+	return $name;
 }
 
 <#
@@ -46,7 +46,7 @@ function Get-DefaultLocation
 		}
 	}
 
-	$null;
+	return $null;
 }
 
 
@@ -75,7 +75,7 @@ Checks if an account is created
 function Verify-AccountCreated
 {
     param([string] $account);
-    ((Get-AzureStorageAccount $account).StorageAccountStatus -eq "Created");
+    return ((Get-AzureStorageAccount $account).StorageAccountStatus -eq "Created");
 }
 
 <#
@@ -87,8 +87,8 @@ function New-StorageService
    $serviceName = (New-StorageServiceName);
    $location = (Get-DefaultLocation);
    $toss = New-AzureStorageAccount $serviceName -Location $location;
-   $toss = Assert-True {Wait-UntilCreated $serviceName} "Unable to create storage account in the allotted time, test setup failure"
-   $global:createdStorageAccounts.Add($serviceName)
+   $toss = Assert-True {Wait-UntilCreated $serviceName} "Unable to create storage account in the allotted time, test setup failure";
+   $global:createdStorageAccounts.Add($serviceName);
    return $serviceName;
 }
 
@@ -100,7 +100,7 @@ function Create-StorageAccount
 {
     $storageService = New-StorageService;
 	$toss = Provision-StorageCredentials $storageService;
-	$toss = Create-TestContainer
+	$toss = Create-TestContainer;
     return $storageService;
 }
 
@@ -160,7 +160,7 @@ Sets up environment variables for storage commands
 #>
 function Cleanup-StorageCredentials
 {
-    Set-Item env:AZURE_STORAGE_CONNECTION_STRING $global:StorageConnectionString
+    Set-Item env:AZURE_STORAGE_CONNECTION_STRING $global:StorageConnectionString;
 }
 
 <#

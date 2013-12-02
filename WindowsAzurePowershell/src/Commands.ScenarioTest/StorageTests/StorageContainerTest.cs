@@ -25,6 +25,9 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest.StorageTests
         {
         }
 
+        /// <summary>
+        /// Set up storage account for container tests
+        /// </summary>
         [TestInitialize]
         public override void TestSetup()
         {
@@ -32,6 +35,9 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest.StorageTests
             powershell.AddScript("Create-StorageAccount");
         }
 
+        /// <summary>
+        /// Remove Created storage accounts
+        /// </summary>
         [TestCleanup]
         public override void TestCleanup()
         {
