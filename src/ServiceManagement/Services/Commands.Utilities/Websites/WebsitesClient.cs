@@ -439,6 +439,25 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Websites
             return website;
         }
 
+        public Site GetWebsiteIfExists(WebSpace webSpace, string name)
+        {
+            name = SetWebsiteName(name, null);
+            Site siteToReturn = null;
+            try
+            {
+                siteToReturn =  WebsiteManagementClient.GetSiteWithCache(name, webSpace);
+            }
+            catch (CloudException cloudException)
+            {
+                if (cloudException.Response.StatusCode != HttpStatusCode.NotFound)
+                {
+                    throw;
+                }
+            }
+
+            return siteToReturn;
+        }
+
         /// <summary>
         /// Gets all slots for a website
         /// </summary>
@@ -717,7 +736,7 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Websites
                  * 1) We are trying to delete a production slot and,
                  * 2) The website has more than one slot.
                  */
-                DeleteAllSlots = IsProductionSlot(slot) && GetWebsiteSlots(websiteName).Count != 1,
+                DeleteAllSlots = IsProductionSlot(slot),
                 DeleteEmptyServerFarm = false,
                 DeleteMetrics = false
             };

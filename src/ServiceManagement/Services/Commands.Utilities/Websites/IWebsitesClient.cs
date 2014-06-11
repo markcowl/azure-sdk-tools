@@ -349,6 +349,14 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Websites
         SiteConfig GetWebsiteConfiguration(string name, string slot);
 
         /// <summary>
+        /// Gets a website if it exists in the given webspace
+        /// </summary>
+        /// <param name="webSpace">The webSpace to search in</param>
+        /// <param name="name">The name of the website</param>
+        /// <returns>The website if it exists, otherwise null.</returns>
+        Site GetWebsiteIfExists(WebSpace webSpace, string name);
+
+        /// <summary>
         /// Enables application diagnostic on website slot.
         /// </summary>
         /// <param name="name">The website name</param>

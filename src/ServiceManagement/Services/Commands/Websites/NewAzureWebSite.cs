@@ -360,9 +360,9 @@ namespace Microsoft.WindowsAzure.Commands.Websites
 
             try
             {
-                if (WebsitesClient.WebsiteExists(website.Name) && !string.IsNullOrEmpty(Slot))
+                createdWebsite = WebsitesClient.GetWebsiteIfExists(webspace, website.Name);
+                if (createdWebsite == null && !string.IsNullOrEmpty(Slot))
                 {
-                    createdWebsite = WebsitesClient.GetWebsite(website.Name);
 
                     // Make sure that the website is in Standard mode
                     if (createdWebsite.ComputeMode == WebSiteComputeMode.Dedicated)
@@ -377,9 +377,8 @@ namespace Microsoft.WindowsAzure.Commands.Websites
                 else
                 {
                     WebsitesClient.CreateWebsite(webspace.Name, website, null);
+                    createdWebsite = WebsitesClient.GetWebsiteIfExists(webspace, website.Name);
                 }
-
-                createdWebsite = WebsitesClient.GetWebsite(website.Name);
 
                 Cache.AddSite(CurrentSubscription.SubscriptionId, createdWebsite);
                 SiteConfig websiteConfiguration = WebsitesClient.GetWebsiteConfiguration(createdWebsite.Name, Slot);

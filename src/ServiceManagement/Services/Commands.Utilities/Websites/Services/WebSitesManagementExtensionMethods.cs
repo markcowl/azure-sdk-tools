@@ -270,11 +270,12 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Websites.Services
     {
         public static Site GetSiteWithCache(
             this IWebSiteManagementClient client,
-            string website)
+            string website, WebSpace webSpace = null)
         {
-            return GetFromCache(client, website) ?? GetFromAzure(client, website);
+            return GetFromCache(client, website) ?? GetFromAzure(client, website, webSpace);
         }
-        
+
+
         private static Site GetFromCache(IWebSiteManagementClient client,
             string website)
         {
@@ -302,8 +303,15 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Websites.Services
         }
 
         private static Site GetFromAzure(IWebSiteManagementClient client,
-            string website)
+            string website,
+            WebSpace webSpace = null)
         {
+            if (webSpace != null)
+            {
+                var siteToReturn = client.WebSites.Get(webSpace.Name, website, null);
+                return null != siteToReturn ? siteToReturn.ToSite() : null; 
+            }
+
             // Get all available webspace using REST API
             var spaces = client.WebSpaces.List();
             foreach (var space in spaces.WebSpaces)
@@ -313,6 +321,9 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Websites.Services
                 input.PropertiesToInclude.Add("publishingpassword");
                 input.PropertiesToInclude.Add("publishingusername");
                 var sites = client.WebSpaces.ListWebSites(space.Name, input);
+                Sites sitesToAdd = new Sites();
+                sites.WebSites.ForEach<WebSite>(s => sitesToAdd.Add(s.ToSite()));
+                Cache.SaveSites(client.Credentials.SubscriptionId, sitesToAdd);
                 var site = sites.WebSites.FirstOrDefault(
                     ws => ws.Name.Equals(website, StringComparison.InvariantCultureIgnoreCase));
                 if (site != null)
