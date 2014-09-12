@@ -638,13 +638,13 @@
           "31959"
         ],
         "x-ms-request-id": [
-          "37b09750-8c87-424e-9f03-6c1bca6af9e8"
+          "37b09750.8.8.17-424e-9f03-6c1bca6af9e8"
         ],
         "x-ms-correlation-request-id": [
-          "37b09750-8c87-424e-9f03-6c1bca6af9e8"
+          "37b09750.8.8.17-424e-9f03-6c1bca6af9e8"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20140806T004301Z:37b09750-8c87-424e-9f03-6c1bca6af9e8"
+          "WESTUS:20140806T004301Z:37b09750.8.8.17-424e-9f03-6c1bca6af9e8"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -6192,7 +6192,7 @@
           "bbe9b380-ff38-4890-9c4c-830df225cd8a"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20140806T004828Z:bbe9b380-ff38-4890-9c4c-830df225cd8a"
+          "WESTUS:20140806T00.8.8.1Z:bbe9b380-ff38-4890-9c4c-830df225cd8a"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -6534,7 +6534,7 @@
           "6a111bbd-a978-41c7-9511-444fe547c137"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20140806T004848Z:6a111bbd-a978-41c7-9511-444fe547c137"
+          "WESTUS:20140806T00.8.8.1Z:6a111bbd-a978-41c7-9511-444fe547c137"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -11164,13 +11164,13 @@
           "31906"
         ],
         "x-ms-request-id": [
-          "65d30f3e-12f3-46ee-941b-069d02828bf4"
+          "65d30f3e-12f3-46ee-941b-069d0.8.8.1bf4"
         ],
         "x-ms-correlation-request-id": [
-          "65d30f3e-12f3-46ee-941b-069d02828bf4"
+          "65d30f3e-12f3-46ee-941b-069d0.8.8.1bf4"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20140806T004359Z:65d30f3e-12f3-46ee-941b-069d02828bf4"
+          "WESTUS:20140806T004359Z:65d30f3e-12f3-46ee-941b-069d0.8.8.1bf4"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -15730,7 +15730,7 @@
           "686db634-723c-44e8-98b7-02ee6725d462"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20140806T004828Z:686db634-723c-44e8-98b7-02ee6725d462"
+          "WESTUS:20140806T00.8.8.1Z:686db634-723c-44e8-98b7-02ee6725d462"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -16072,7 +16072,7 @@
           "4fa6aa02-55bc-4cbf-a47f-1167b547e78c"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20140806T004848Z:4fa6aa02-55bc-4cbf-a47f-1167b547e78c"
+          "WESTUS:20140806T00.8.8.1Z:4fa6aa02-55bc-4cbf-a47f-1167b547e78c"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"

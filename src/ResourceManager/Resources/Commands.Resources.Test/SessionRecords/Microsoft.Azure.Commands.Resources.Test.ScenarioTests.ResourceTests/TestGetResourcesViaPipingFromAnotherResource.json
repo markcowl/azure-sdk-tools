@@ -58,13 +58,13 @@
           "31887"
         ],
         "x-ms-request-id": [
-          "4b2632f8-eef1-4d80-8c8e-e52ac3db93e1"
+          "4b2632f8-eef1-4d80.8.8.1e-e52ac3db93e1"
         ],
         "x-ms-correlation-request-id": [
-          "4b2632f8-eef1-4d80-8c8e-e52ac3db93e1"
+          "4b2632f8-eef1-4d80.8.8.1e-e52ac3db93e1"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20140904T003012Z:4b2632f8-eef1-4d80-8c8e-e52ac3db93e1"
+          "WESTUS:20140904T003012Z:4b2632f8-eef1-4d80.8.8.1e-e52ac3db93e1"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"

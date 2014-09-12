@@ -526,13 +526,13 @@
           "31999"
         ],
         "x-ms-request-id": [
-          "f93c0934-15c0-44f6-a680-8584afeae341"
+          "f93c0934-15c0-44f6-a680.8.8.14afeae341"
         ],
         "x-ms-correlation-request-id": [
-          "f93c0934-15c0-44f6-a680-8584afeae341"
+          "f93c0934-15c0-44f6-a680.8.8.14afeae341"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20140905T172555Z:f93c0934-15c0-44f6-a680-8584afeae341"
+          "WESTUS:20140905T172555Z:f93c0934-15c0-44f6-a680.8.8.14afeae341"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
