@@ -650,7 +650,7 @@ Please follow these steps in the portal:
     <value>The subscription named '{0}' cannot be found. Use Set-AzureSubscription to initialize the subscription data.</value>
   </data>
   <data name="InvalidSubscriptionId" xml:space="preserve">
-    <value>The provided subscription if {0} is not valid</value>
+    <value>The provided subscription id {0} is not valid</value>
   </data>
   <data name="InvalidSubscriptionName" xml:space="preserve">
     <value>Must specify a non-null subscription name.</value>

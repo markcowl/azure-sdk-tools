@@ -1598,4 +1598,10 @@ use and privacy statement at &lt;url&gt; and (c) agree to sharing my contact inf
   <data name="Argument_WebSpaceMissing" xml:space="preserve">
     <value>Please provide webspace name as well.</value>
   </data>
+  <data name="SchedulerInvalidClientCertAuthRequest" xml:space="preserve">
+    <value>A valid value for ClientCertificatePfx and ClientCertificatePassword parameters are required for Http scheduler jobs with ClientCertificate authentication type.</value>
+  </data>
+  <data name="SchedulerInvalidNoneAuthRequest" xml:space="preserve">
+    <value>For None authentication type, both ClientCertificatePfx and ClientCertificatePassword parameters should be null</value>
+  </data>
 </root>

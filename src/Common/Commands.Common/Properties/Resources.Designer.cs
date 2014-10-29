@@ -1669,7 +1669,7 @@ namespace Microsoft.WindowsAzure.Commands.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provided subscription if {0} is not valid.
+        ///   Looks up a localized string similar to The provided subscription id {0} is not valid.
         /// </summary>
         public static string InvalidSubscriptionId {
             get {

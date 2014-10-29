@@ -68,7 +68,7 @@ namespace Microsoft.Azure.Commands.Resources.Test.ScenarioTests
 
             RunPsTestWorkflow(
                 () => scripts, 
-                // no cutom initializer
+                // no custom initializer
                 null, 
                 // no custom cleanup 
                 null,

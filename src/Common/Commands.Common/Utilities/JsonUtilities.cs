@@ -39,7 +39,7 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Common
             }
         }
 
-        public static Dictionary<string, object> DeserializeJson(string jsonString)
+        public static Dictionary<string, object> DeserializeJson(string jsonString, bool throwExceptionOnFailure = false)
         {
             Dictionary<string, object> result = new Dictionary<string,object>();
             if (jsonString == null)
@@ -62,6 +62,10 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Common
             }
             catch
             {
+                if (throwExceptionOnFailure)
+                {
+                    throw;
+                }
                 result = null;
             }
             return result;

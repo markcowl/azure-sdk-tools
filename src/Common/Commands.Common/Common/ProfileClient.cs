@@ -521,6 +521,18 @@ namespace Microsoft.WindowsAzure.Commands.Common
             }
         }
 
+        public AzureSubscription SetSubscriptionAsCurrent(Guid id, string accountName)
+        {
+            var subscription = Profile.Subscriptions.Values.FirstOrDefault(s => s.Id == id);
+
+            if (subscription == null)
+            {
+                throw new ArgumentException(string.Format(Resources.InvalidSubscriptionId, id), "id");
+            }
+
+            return SetSubscriptionAsCurrent(subscription.Name, accountName);
+        }
+
         public AzureSubscription SetSubscriptionAsCurrent(string name, string accountName)
         {
             if (string.IsNullOrEmpty(name))
@@ -547,6 +559,18 @@ namespace Microsoft.WindowsAzure.Commands.Common
             }
 
             return currentSubscription;
+        }
+
+        public AzureSubscription SetSubscriptionAsDefault(Guid id, string accountName)
+        {
+            var subscription = Profile.Subscriptions.Values.FirstOrDefault(s => s.Id == id);
+
+            if (subscription == null)
+            {
+                throw new ArgumentException(string.Format(Resources.InvalidSubscriptionId, id), "id");
+            }
+
+            return SetSubscriptionAsDefault(subscription.Name, accountName);
         }
 
         public AzureSubscription SetSubscriptionAsDefault(string name, string accountName)

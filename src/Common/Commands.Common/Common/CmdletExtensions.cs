@@ -112,6 +112,12 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Common
             dynMethod.Invoke(cmdlt, null);
         }
 
+        public static void SetParameterSet(this PSCmdlet cmdlt, string value)
+        {
+            FieldInfo dynField = (typeof(Cmdlet)).GetField("_parameterSetName", BindingFlags.NonPublic | BindingFlags.Instance);
+            dynField.SetValue(cmdlt, value);
+        }
+
         public static void InvokeEndProcessing(this PSCmdlet cmdlt)
         {
             MethodInfo dynMethod = (typeof(PSCmdlet)).GetMethod("EndProcessing", BindingFlags.NonPublic | BindingFlags.Instance);

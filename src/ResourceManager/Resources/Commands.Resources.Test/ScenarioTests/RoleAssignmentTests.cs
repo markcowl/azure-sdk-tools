@@ -22,6 +22,7 @@ using Microsoft.Azure.Management.Resources.Models;
 using Microsoft.Azure.Utilities.HttpRecorder;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Microsoft.WindowsAzure.Testing;
+using Microsoft.WindowsAzure.Testing.TestCategories;
 using System;
 using System.Linq;
 using Xunit;

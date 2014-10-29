@@ -27,9 +27,12 @@ namespace Microsoft.Azure.Commands.Network.Gateway
         [Parameter(Position = 1, Mandatory = false, HelpMessage = "The type of routing that the gateway will use. This will default to StaticRouting if no value is provided.")]
         public GatewayType GatewayType { get; set; }
 
+        [Parameter(Position = 2, Mandatory = false, HelpMessage = "The Gateway SKU for the new gateway.")]
+        public GatewaySKU GatewaySKU { get; set; }
+
         public override void ExecuteCmdlet()
         {
-            WriteObject(Client.CreateGateway(VNetName, GatewayType));
+            WriteObject(Client.CreateGateway(VNetName, GatewayType, GatewaySKU));
         }
     }
 }

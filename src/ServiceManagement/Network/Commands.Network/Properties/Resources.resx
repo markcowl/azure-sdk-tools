@@ -177,4 +177,28 @@
   <data name="PromptOnCachePlanChange" xml:space="preserve">
     <value>Are you sure you want to reduce the cache offering? All cache data will be lost.</value>
   </data>
+  <data name="RemoveNetworkSecurityGroupFromSubnetSucceeded" xml:space="preserve">
+    <value>Successfully removed Network Security Group with name "{0}" from Subnet "{1}" in Virtual Network "{2}".</value>
+  </data>
+  <data name="RemoveNetworkSecurityGroupFromSubnetWarning" xml:space="preserve">
+    <value>Are you sure you want to remove the Network Security Group "{0}" from Subnet "{1}" in Virtual Network "{2}"?</value>
+  </data>
+  <data name="RemoveNetworkSecurityGroupSucceeded" xml:space="preserve">
+    <value>Successfully removed Network Security Group with name "{0}".</value>
+  </data>
+  <data name="RemoveNetworkSecurityGroupWarning" xml:space="preserve">
+    <value>Are you sure you want to remove the Network Security Group "{0}"?</value>
+  </data>
+  <data name="ReplaceNetworkSecurityGroupInSubnetWarning" xml:space="preserve">
+    <value>There is already a Network Security Group associated with Subnet "{0}" in Virtual Network "{1}". Are you sure you want to replace it with Network Security Group "{2}"?</value>
+  </data>
+  <data name="ReplaceNetworkSecurityGroupInSubnetWarningSucceeded" xml:space="preserve">
+    <value>Successfully set NetworkSecurityGroup "{0}" in Subnet "{1}" in Virtual Network "{1}"</value>
+  </data>
+  <data name="NetworkSecurityGroupNotActiveInSubnet" xml:space="preserve">
+    <value>Network SecurityGroup "{0}" is not active in Subnet "{1}" in Virtual Network "{2}".</value>
+  </data>
+  <data name="RemoveNetworkSecurityRuleWarning" xml:space="preserve">
+    <value>Are you sure you want to remove the Network Security Rule "{0}" from Network Security Group "{1}"?</value>
+  </data>
 </root>

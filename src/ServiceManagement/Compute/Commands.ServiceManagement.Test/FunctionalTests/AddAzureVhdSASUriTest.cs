@@ -71,9 +71,9 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
             int i = 0;            
             while (i < 16)
             {
-                if (i != 3 && i != 7 && i != 11 && i != 15)
+                if (!isReadWritePermission(i))
                 {
-                    i++; // Skip negative tests due to BUG:
+                    i++; // Skip negative tests due to BUG: https://github.com/Azure/azure-sdk-tools/issues/2956
                 }
                 else
                 {
@@ -93,22 +93,8 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
                     }
                     catch (Exception e)
                     {
-                        if (e.ToString().Contains("already running"))
-                        {
-                            Console.WriteLine(e.ToString());
-                            continue;
-                        }
-                        if (i != 3 && i != 7 && i != 11 && i != 15)
-                        {
-                            Console.WriteLine("Error as expected.  Permission: {0}", i);
-                            Console.WriteLine("Error message: {0}", e.InnerException.Message);
-                            i++;
-                            continue;
-                        }
-                        else
-                        {
-                            Assert.Fail("Test failed Permission: {0} \n {1}", i, e.ToString());
-                        }
+                        continueIfNotReadWrite(e, ref i);
+                        continue;
                     }
                 }
             }
@@ -160,9 +146,9 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
             int i = 0;
             while (i < 16)
             {
-                if (i != 7 && i != 15)
+                if (!isReadWriteDeletePermission(i))
                 {
-                    i++; // Skip negative tests due to BUG:
+                    i++; // Skip negative tests due to BUG: https://github.com/Azure/azure-sdk-tools/issues/2956
                 }
                 else
                 {
@@ -184,22 +170,8 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
                     }
                     catch (Exception e)
                     {
-                        if (e.ToString().Contains("already running"))
-                        {
-                            Console.WriteLine(e.ToString());
-                            continue;
-                        }
-                        if (i != 7 && i != 15)
-                        {
-                            Console.WriteLine("Error as expected.  Permission: {0}", i);
-                            Console.WriteLine("Error message: {0}", e.InnerException.Message);
-                            i++;
-                            continue;
-                        }
-                        else
-                        {
-                            Assert.Fail("Test failed Permission: {0} \n {1}", i, e.ToString());
-                        }
+                        continueIfNotReadWriteDelete(e, ref i);
+                        continue;
                     }
                 }
             }
@@ -233,9 +205,9 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
             int i = 0;
             while (i < 16)
             {
-                if (i != 7 && i != 15)
+                if (!isReadWriteDeletePermission(i))
                 {
-                    i++; // Skip negative tests due to BUG:
+                    i++; // Skip negative tests due to BUG: https://github.com/Azure/azure-sdk-tools/issues/2956
                 }
                 else
                 {
@@ -255,22 +227,8 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
                     }
                     catch (Exception e)
                     {
-                        if (e.ToString().Contains("already running"))
-                        {
-                            Console.WriteLine(e.ToString());
-                            continue;
-                        }
-                        if (i != 7 && i != 15)
-                        {
-                            Console.WriteLine("Error as expected.  Permission: {0}", i);
-                            Console.WriteLine("Error message: {0}", e.InnerException.Message);
-                            i++;
-                            continue;
-                        }
-                        else
-                        {
-                            Assert.Fail("Test failed Permission: {0} \n {1}", i, e.ToString());
-                        }
+                        continueIfNotReadWriteDelete(e, ref i);
+                        continue;
                     }
                 }
             }
@@ -302,7 +260,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
 
             for (int i = 0; i < 16; i++)            
             {
-                if (i == 3 && i == 7 && i == 11 && i == 15) // Otherwise, skip negative tests due to BUG:
+                if (isReadWritePermission(i)) // Otherwise, skip negative tests due to BUG: https://github.com/Azure/azure-sdk-tools/issues/2956
                 {
                     string destinationSasUri2 = CreateSasUriWithPermission(vhdName, i);
                     try
@@ -330,16 +288,8 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
                     }
                     catch (Exception e)
                     {
-                        if (i != 3 && i != 7 && i != 11 && i != 15)
-                        {
-                            Console.WriteLine("Error as expected.  Permission: {0}", i);
-                            Console.WriteLine("Error message: {0}", e.InnerException.Message);
-                            continue;
-                        }
-                        else
-                        {
-                            Assert.Fail("Test failed.  Permission: {0}", i);
-                        }
+                        continueIfNotReadWrite(e, ref i);
+                        continue;
                     }
                 }
             }
@@ -372,9 +322,9 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
             int i = 0;            
             while (i < 16)
             {
-                if (i != 3 && i != 7 && i != 11 && i != 15)
+                if (!isReadWritePermission(i))
                 {
-                    i++; // Skip negative tests due to BUG:
+                    i++; // Skip negative tests due to BUG: https://github.com/Azure/azure-sdk-tools/issues/2956
                 }
                 else
                 {
@@ -394,22 +344,8 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
                     }
                     catch (Exception e)
                     {
-                        if (e.ToString().Contains("already running"))
-                        {
-                            Console.WriteLine(e.ToString());
-                            continue;
-                        }
-                        if (i != 3 && i != 7 && i != 11 && i != 15)
-                        {
-                            Console.WriteLine("Error as expected.  Permission: {0}", i);
-                            Console.WriteLine("Error message: {0}", e.InnerException.Message);
-                            i++;
-                            continue;
-                        }
-                        else
-                        {
-                            Assert.Fail("Test failed Permission: {0} \n {1}", i, e.ToString());
-                        }
+                        continueIfNotReadWrite(e, ref i);
+                        continue;
                     }
                 }
             }
@@ -442,7 +378,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
 
             for (int i = 0; i < 16; i++)
             {
-                if (i == 7 && i == 15) // Otherwise, skip negative tests due to BUG:
+                if (!isReadWriteDeletePermission(i)) // Otherwise, skip negative tests due to BUG: https://github.com/Azure/azure-sdk-tools/issues/2956
                 {
                     string destinationSasUri2 = CreateSasUriWithPermission(vhdName, i);
                     try
@@ -461,16 +397,8 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
                     }
                     catch (Exception e)
                     {
-                        if (i != 7 && i != 15)
-                        {
-                            Console.WriteLine("Error as expected.  Permission: {0}", i);
-                            Console.WriteLine("Error message: {0}", e.InnerException.Message);
-                            continue;
-                        }
-                        else
-                        {
-                            Assert.Fail("Test failed Permission: {0} \n {1}", i, e.ToString());
-                        }
+                        continueIfNotReadWriteDelete(e, ref i);
+                        continue;
                     }
                 }
             }
@@ -488,7 +416,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
         /// </summary>
         [TestMethod(), TestCategory(Category.Sequential), TestProperty("Feature", "IAAS"), Priority(1), Owner("hylee"), Description("Test the cmdlet (Add-AzureVhd)")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "|DataDirectory|\\Resources\\patch_VHD.csv", "patch_VHD#csv", DataAccessMethod.Sequential)]
-        [Ignore]
+        [Ignore] // BUG: https://github.com/Azure/azure-sdk-tools/issues/2956
         public void PatchFirstLevelDifferencingDiskSasUri()
         {
             StartTest(MethodBase.GetCurrentMethod().Name, testStartTime);
@@ -639,9 +567,9 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
             int i = 0;
             while (i < 16)
             {
-                if (i != 3 && i != 7 && i != 11 && i != 15)
+                if (!isReadWritePermission(i))
                 {
-                    i++; // Skip negative tests due to BUG:
+                    i++; // Skip negative tests due to BUG: https://github.com/Azure/azure-sdk-tools/issues/2956
                 }
                 else
                 {
@@ -674,17 +602,8 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
                     }
                     catch (Exception e)
                     {
-                        if (i != 3 && i != 7 && i != 11 && i != 15)
-                        {
-                            Console.WriteLine("Error as expected.  Permission: {0}", i);
-                            Console.WriteLine("Error message: {0}", e.InnerException.Message);
-                            i++;
-                            continue;
-                        }
-                        else
-                        {
-                            Assert.Fail("Test failed Permission: {0} \n {1}", i, e.ToString());
-                        }
+                        continueIfNotReadWrite(e, ref i);
+                        continue;
                     }
                 }
             }
@@ -702,6 +621,57 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
         {
             Console.WriteLine("Test {0}", pass ? "passed" : "failed");
             ReImportSubscription();
+        }
+
+        private bool checkPermission(int i, int j)
+        {
+            return (i & j) == j;
+        }
+
+        private bool isReadWritePermission(int i)
+        {
+            return checkPermission(i,(int)(SharedAccessBlobPermissions.Read ^ SharedAccessBlobPermissions.Write));
+        }
+
+        private bool isReadWriteDeletePermission(int i)
+        {
+            return checkPermission(i,
+                (int)(SharedAccessBlobPermissions.Read ^ SharedAccessBlobPermissions.Write ^ SharedAccessBlobPermissions.Delete));
+        }
+        private void continueIfNotReadWrite(Exception e, ref int i)
+        {
+            if (e.ToString().Contains("already running"))
+            {
+                Console.WriteLine(e.ToString());
+            }
+            else if (!isReadWritePermission(i))
+            {
+                Console.WriteLine("Error as expected.  Permission: {0}", i);
+                Console.WriteLine("Error message: {0}", e.InnerException.Message);
+                i++;
+            }
+            else
+            {
+                Assert.Fail("Test failed Permission: {0} \n {1}", i, e.ToString());
+            }
+        }
+
+        private void continueIfNotReadWriteDelete(Exception e, ref int i)
+        {
+            if (e.ToString().Contains("already running"))
+            {
+                Console.WriteLine(e.ToString());
+            }
+            else if (!isReadWriteDeletePermission(i))
+            {
+                Console.WriteLine("Error as expected.  Permission: {0}", i);
+                Console.WriteLine("Error message: {0}", e.InnerException.Message);
+                i++;
+            }
+            else
+            {
+                Assert.Fail("Test failed Permission: {0} \n {1}", i, e.ToString());
+            }
         }
     }
 }

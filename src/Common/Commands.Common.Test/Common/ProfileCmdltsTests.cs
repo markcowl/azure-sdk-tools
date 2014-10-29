@@ -446,6 +446,191 @@ namespace Microsoft.WindowsAzure.Commands.Common.Test.Common
             }
         }
 
+        [Fact]
+        public void SelectDefaultAzureSubscriptionByNameUpdatesProfile()
+        {
+            SelectAzureSubscriptionCommand cmdlt = new SelectAzureSubscriptionCommand();
+            var client = SetupDefaultProfile();
+
+            // Setup
+            cmdlt.CommandRuntime = commandRuntimeMock.Object;
+            cmdlt.SetParameterSet("SelectDefaultSubscriptionByNameParameterSet");
+            cmdlt.SubscriptionName = azureSubscription2.Name;
+            cmdlt.Default = new SwitchParameter(true);
+            Assert.NotEqual(azureSubscription2.Id, client.Profile.DefaultSubscription.Id);
+
+            // Act
+            cmdlt.InvokeBeginProcessing();
+            cmdlt.ExecuteCmdlet();
+            cmdlt.InvokeEndProcessing();
+
+            // Verify
+            client = new ProfileClient();
+            Assert.NotNull(client.Profile.DefaultSubscription);
+            Assert.Equal(azureSubscription2.Id, client.Profile.DefaultSubscription.Id);
+        }
+
+        [Fact]
+        public void SelectAzureSubscriptionByNameUpdatesProfile()
+        {
+            SelectAzureSubscriptionCommand cmdlt = new SelectAzureSubscriptionCommand();
+            SetupDefaultProfile();
+
+            // Setup
+            cmdlt.CommandRuntime = commandRuntimeMock.Object;
+            cmdlt.SetParameterSet("SelectSubscriptionByNameParameterSet");
+            cmdlt.SubscriptionName = azureSubscription2.Name;
+            Assert.Null(AzureSession.CurrentContext.Subscription);
+
+            // Act
+            cmdlt.InvokeBeginProcessing();
+            cmdlt.ExecuteCmdlet();
+            cmdlt.InvokeEndProcessing();
+
+            // Verify
+            Assert.NotNull(AzureSession.CurrentContext.Subscription);
+            Assert.Equal(azureSubscription2.Id, AzureSession.CurrentContext.Subscription.Id);
+        }
+        [Fact]
+        public void SelectDefaultAzureSubscriptionByIdAndNoDefaultUpdatesProfile()
+        {
+            SelectAzureSubscriptionCommand cmdlt = new SelectAzureSubscriptionCommand();
+            var client = SetupDefaultProfile();
+
+            // Setup
+            cmdlt.CommandRuntime = commandRuntimeMock.Object;
+            cmdlt.SetParameterSet("SelectDefaultSubscriptionByIdParameterSet");
+            cmdlt.SubscriptionId = azureSubscription2.Id.ToString();
+            cmdlt.Default = new SwitchParameter(true);
+            Assert.NotEqual(azureSubscription2.Id, client.Profile.DefaultSubscription.Id);
+
+            // Act
+            cmdlt.InvokeBeginProcessing();
+            cmdlt.ExecuteCmdlet();
+            cmdlt.InvokeEndProcessing();
+
+            // Verify
+            client = new ProfileClient();
+            Assert.NotNull(client.Profile.DefaultSubscription);
+            Assert.Equal(azureSubscription2.Id, client.Profile.DefaultSubscription.Id);
+
+            cmdlt = new SelectAzureSubscriptionCommand();
+
+            // Setup
+            cmdlt.CommandRuntime = commandRuntimeMock.Object;
+            cmdlt.SetParameterSet("NoDefaultSubscriptionParameterSet");
+            cmdlt.NoDefault = new SwitchParameter(true);
+
+            // Act
+            cmdlt.InvokeBeginProcessing();
+            cmdlt.ExecuteCmdlet();
+            cmdlt.InvokeEndProcessing();
+
+            // Verify
+            client = new ProfileClient();
+            Assert.Null(client.Profile.DefaultSubscription);
+        }
+
+        [Fact]
+        public void SelectAzureSubscriptionByIdAndNoCurrentUpdatesProfile()
+        {
+            SelectAzureSubscriptionCommand cmdlt = new SelectAzureSubscriptionCommand();
+            SetupDefaultProfile();
+
+            // Setup
+            cmdlt.CommandRuntime = commandRuntimeMock.Object;
+            cmdlt.SetParameterSet("SelectSubscriptionByIdParameterSet");
+            cmdlt.SubscriptionId = azureSubscription2.Id.ToString();
+            Assert.Null(AzureSession.CurrentContext.Subscription);
+
+            // Act
+            cmdlt.InvokeBeginProcessing();
+            cmdlt.ExecuteCmdlet();
+            cmdlt.InvokeEndProcessing();
+
+            // Verify
+            Assert.NotNull(AzureSession.CurrentContext.Subscription);
+            Assert.Equal(azureSubscription2.Id, AzureSession.CurrentContext.Subscription.Id);
+
+            cmdlt = new SelectAzureSubscriptionCommand();
+
+            // Setup
+            cmdlt.CommandRuntime = commandRuntimeMock.Object;
+            cmdlt.SetParameterSet("NoCurrentSubscriptionParameterSet");
+            cmdlt.NoCurrent = new SwitchParameter(true);
+
+            // Act
+            cmdlt.InvokeBeginProcessing();
+            cmdlt.ExecuteCmdlet();
+            cmdlt.InvokeEndProcessing();
+
+            // Verify
+            Assert.Null(AzureSession.CurrentContext.Subscription);
+        }
+
+        [Fact]
+        public void SelectAzureSubscriptionByInvalidIdThrowsException()
+        {
+            SelectAzureSubscriptionCommand cmdlt = new SelectAzureSubscriptionCommand();
+            SetupDefaultProfile();
+
+            // Setup
+            cmdlt.CommandRuntime = commandRuntimeMock.Object;
+            cmdlt.SetParameterSet("SelectSubscriptionByIdParameterSet");
+            string invalidGuid = Guid.NewGuid().ToString();
+            cmdlt.SubscriptionId = invalidGuid;
+            Assert.Null(AzureSession.CurrentContext.Subscription);
+
+            // Act
+            cmdlt.InvokeBeginProcessing();
+            try
+            {
+                cmdlt.ExecuteCmdlet();
+                Assert.True(false);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.Contains(string.Format(Microsoft.WindowsAzure.Commands.Common.Properties.Resources.InvalidSubscriptionId, invalidGuid), ex.Message);
+            }
+        }
+
+        [Fact]
+        public void SelectAzureSubscriptionByInvalidGuidThrowsException()
+        {
+            SelectAzureSubscriptionCommand cmdlt = new SelectAzureSubscriptionCommand();
+            SetupDefaultProfile();
+
+            // Setup
+            cmdlt.CommandRuntime = commandRuntimeMock.Object;
+            cmdlt.SetParameterSet("SelectSubscriptionByIdParameterSet");
+            string invalidGuid = "foo";
+            cmdlt.SubscriptionId = invalidGuid;
+            Assert.Null(AzureSession.CurrentContext.Subscription);
+
+            // Act
+            cmdlt.InvokeBeginProcessing();
+            try
+            {
+                cmdlt.ExecuteCmdlet();
+                Assert.True(false);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.Contains(string.Format(Microsoft.WindowsAzure.Commands.Common.Properties.Resources.InvalidGuid, invalidGuid), ex.Message);
+            }
+        }
+
+        private ProfileClient SetupDefaultProfile()
+        {
+            ProfileClient client = new ProfileClient();
+            client.AddOrSetEnvironment(azureEnvironment);
+            client.AddOrSetAccount(azureAccount);
+            client.AddOrSetSubscription(azureSubscription1);
+            client.AddOrSetSubscription(azureSubscription2);
+            client.Profile.Save();
+            return client;
+        }
+
         private void SetMockData()
         {
             azureSubscription1 = new AzureSubscription

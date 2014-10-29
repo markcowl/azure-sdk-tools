@@ -3460,11 +3460,29 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A valid value for ClientCertificatePfx and ClientCertificatePassword parameters are required for Http scheduler jobs with ClientCertificate authentication type..
+        /// </summary>
+        public static string SchedulerInvalidClientCertAuthRequest {
+            get {
+                return ResourceManager.GetString("SchedulerInvalidClientCertAuthRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid location entered. Pick one of the locations from Get-AzureSchedulerLocation.
         /// </summary>
         public static string SchedulerInvalidLocation {
             get {
                 return ResourceManager.GetString("SchedulerInvalidLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For None authentication type, both ClientCertificatePfx and ClientCertificatePassword parameters should be null.
+        /// </summary>
+        public static string SchedulerInvalidNoneAuthRequest {
+            get {
+                return ResourceManager.GetString("SchedulerInvalidNoneAuthRequest", resourceCulture);
             }
         }
         
