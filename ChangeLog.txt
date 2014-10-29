@@ -1,4 +1,4 @@
-2014.10.27 Version 0.8.10
+﻿2014.10.27 Version 0.8.10
 * Azure Data Factory cmdlets in AzureResourceManager mode
     * New-AzureDataFactory
     * New-AzureDataFactoryGateway
@@ -58,6 +58,33 @@
         * SlotStickyConnectionStringNames – connection string names not to be moved during swap operation
         * SlotStickyAppSettingNames – application settings names not to be moved during swap operation
         * AutoSwapSlotName – slot name to swap automatically with after successful deployment
+* Recovery Services
+    * Import & view vault settings
+        * Import-AzureSiteRecoveryVaultSettingsFile
+        * Get-AzureSiteRecoveryVaultSettings
+    * Enumerate Servers, Protection Containers, Protection Entities
+        * Get-AzureSiteRecoveryServer
+        * Get-AzureSiteRecoveryProtectionContainer
+        * Get-AzureSiteRecoveryProtectionEntity
+        * Get-AzureSiteRecoveryVM
+    * Manage Azure Site Recovery Operations
+        * Get-AzureSiteRecoveryJob
+        * Restart-AzureSiteRecoveryJob
+        * Resume-AzureSiteRecoveryJob
+        * Stop-AzureSiteRecoveryJob
+    * Manage Recovery Plan
+        * New-AzureSiteRecoveryRecoveryPlan
+        * Get-AzureSiteRecoveryRecoveryPlanFile
+        * Get-AzureSiteRecoveryRecoveryPlan
+        * Remove-AzureSiteRecoveryRecoveryPlan
+        * Update-AzureSiteRecoveryRecoveryPlan
+    * Protection and Failover Operations
+        * Set-AzureSiteRecoveryProtectionEntity
+        * Start-AzureSiteRecoveryCommitFailoverJob
+        * Start-AzureSiteRecoveryPlannedFailoverJob
+        * Start-AzureSiteRecoveryTestFailoverJob
+        * Start-AzureSiteRecoveryUnplannedFailoverJob
+        * Update-AzureSiteRecoveryProtectionDirection
 
 2014.10.03 Version 0.8.9
 * Redis Cache cmdlets in AzureResourceManager mode
