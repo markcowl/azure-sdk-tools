@@ -20,7 +20,7 @@
       <maml:para>When you run Add-AzureAccount, it displays an interactive window that prompts you to sign into your Azure account. This sign-in is valid until the access token expires. When it expires, cmdlets that require access to your account prompt you to run Add-AzureAccount again.</maml:para>
       <maml:para>If you have a Microsoft Organizational account, you can use the -Credential parameter to add the subscriptions associated with your account to Windows PowerShell without an interactive dialog.</maml:para>
       <maml:para>When specifying -ServicePrincipal switch a -Credential parameter is used to authenticate a Service Principal.</maml:para>
-      <maml:para>This topic describes the cmdlet in the 0.8.10 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
+      <maml:para>This topic describes the cmdlet in the 0.8.10.1 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
 	</maml:description>
 	<command:syntax>
 		<command:syntaxItem>
@@ -305,7 +305,7 @@ PS C:\&gt;Add-AzureAccount -Credential $credential -ServicePrincipal -Tenant &qu
       <maml:para>An Azure environment an independent deployment of Microsoft Azure, such as AzureCloud for global Azure and AzureChinaCloud for Azure operated by 21Vianet in China. You can also create on-premises Azure environments by using Azure Pack and the WAPack cmdlets. For more information, see <maml:navigationLink><maml:linkText>Azure Pack</maml:linkText><maml:uri></maml:uri></maml:navigationLink> (http://www.microsoft.com/en-us/server-cloud/products/windows-azure-pack/default.aspx).</maml:para>
       <maml:para>Only the Name parameter of this cmdlet is mandatory. If you omit a parameter, its value is null ($null), and the service that uses that endpoint might not function properly. To add or change the value of an environment property, use the Set-AzureEnvironment cmdlet.</maml:para>
       <maml:para>NOTE: Changing your environment can cause your account to fail. Typically, environments are added only for testing or troubleshooting.</maml:para>
-      <maml:para>This topic describes the cmdlet in the 0.8.10 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
+      <maml:para>This topic describes the cmdlet in the 0.8.10.1 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
 	</maml:description>
 	<command:syntax>
 		<command:syntaxItem>
@@ -1691,7 +1691,7 @@ GalleryEndpoint               : https://gallery.azure.com/</dev:code>
       <maml:para>The Remove-AzureAccount cmdlet deletes an Azure account and its subscriptions from the subscription data file in your roaming user profile. It does not delete the account from Microsoft Azure, or change the actual account in any way.</maml:para>
       <maml:para>Using this cmdlet is a lot like logging out of your Azure account. And, if you want to log into the account again, use the Add-AzureAccount or Import-AzurePublishSettingsFile to add the account to Windows PowerShell again. </maml:para>
       <maml:para>You can also use Remove-AzureAccount cmdlet to change the way the Azure PowerShell cmdlets sign into your Azure account. If your account has both a management certificate from Import-AzurePublishSettingsFile and an access token from Add-AzureAccount, the Azure PowerShell cmdlets use only the access token; they ignore the management certificate. To use the management certificate, run Remove-AzureAccount. When Remove-AzureAccount finds both a management certificate and an access token, it deletes only the access token, instead of deleting the account. The management certificate is still there, so account is still available to Windows PowerShell.</maml:para>
-      <maml:para>This topic describes the cmdlet in the 0.8.10 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
+      <maml:para>This topic describes the cmdlet in the 0.8.10.1 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
 	</maml:description>
 	<command:syntax>
 		<command:syntaxItem>
@@ -2071,7 +2071,7 @@ GalleryEndpoint               : https://gallery.azure.com/</dev:code>
 	</command:details>
 	<maml:description>
       <maml:para>The Remove-AzureSubscription cmdlet deletes an Azure subscription from your subscription data file so Windows PowerShell can't find it. This cmdlet does not delete the subscription from Microsoft Azure, or change the actual subscription in any way. </maml:para>
-      <maml:para>This topic describes the cmdlet in the 0.8.10 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
+      <maml:para>This topic describes the cmdlet in the 0.8.10.1 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
 	</maml:description>
 	<command:syntax>
 		<command:syntaxItem>
@@ -2371,7 +2371,7 @@ Are you sure you want to perform this action?
       <maml:para>The Select-AzureSubscription cmdlet sets and clears the current and default Azure subscriptions.</maml:para>
       <maml:para>The "current subscription" is the subscription that is used by default in the current Windows PowerShell session. The "default subscription" is used by default in all Windows PowerShell sessions. The "current subscription" label lets you specify a different subscription to be used by default for the current session without changing the "default subscription" for all other sessions.</maml:para>
       <maml:para>The "default" subscription designation is saved in your subscription data file. The session-specific "current" designation is not saved.</maml:para>
-      <maml:para>This topic describes the cmdlet in the 0.8.10 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
+      <maml:para>This topic describes the cmdlet in the 0.8.10.1 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
 	</maml:description>
 	<command:syntax>
 		<command:syntaxItem>
@@ -3015,7 +3015,7 @@ Are you sure you want to perform this action?
       <maml:para>The Set-AzureSubscription cmdlet establishes and changes the properties of an Azure subscription. You can use this cmdlet to create a new subscription or change the properties of an existing subscription.</maml:para>
       <maml:para>To create a new subscription, select a unique name for the value of the SubscriptionName parameter. To change an existing subscription, use the SubscriptionName parameter to identify the subscription.</maml:para>
       <maml:para>This cmdlet changes the data in the subscription data file that you create when you use the Add-AzureAccount or Import-AzurePublishSettingsFile cmdlet to add an Azure account to Windows PowerShell.</maml:para>
-      <maml:para>This topic describes the cmdlet in the 0.8.10 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
+      <maml:para>This topic describes the cmdlet in the 0.8.10.1 version of the Microsoft Azure PowerShell module. To find out the version of the module you're using, from the Azure PowerShell console, type (get-module azure).version.</maml:para>
 	</maml:description>
 	<command:syntax>
 		<command:syntaxItem>

@@ -539,7 +539,8 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Websites
                     GeoRegion = siteToCreate.WebSpaceToCreate.GeoRegion,
                     Name = siteToCreate.WebSpaceToCreate.Name,
                     Plan = siteToCreate.WebSpaceToCreate.Plan
-                }
+                },
+                ServerFarm = string.Empty
             };
 
             var response = WebsiteManagementClient.WebSites.Create(webspaceName, options);
