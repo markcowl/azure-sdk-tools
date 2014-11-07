@@ -44,6 +44,9 @@ using Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests.Pow
 using Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests.PreviewCmdletInfo;
 using Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests.SubscriptionCmdletInfo;
 using Microsoft.WindowsAzure.Commands.Utilities.Common;
+using Microsoft.WindowsAzure.Management.Network;
+using Microsoft.Azure.Commands.Network.Gateway.Model;
+using Microsoft.WindowsAzure.Management.Network.Models;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
@@ -1332,12 +1335,17 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
 
         public SM.OSImageContext UpdateAzureVMImage(string imageName, string label, string recommendedSize = null)
         {
-            return RunPSCmdletAndReturnFirst<SM.OSImageContext>(new UpdateAzureVMImageCmdletInfo(imageName, label, recommendedSize,null));
+            return RunPSCmdletAndReturnFirst<SM.OSImageContext>(new UpdateAzureVMImageCmdletInfo(imageName, label, recommendedSize, null, null));
+        }
+        
+        public SM.OSImageContext UpdateAzureVMImage(string imageName, string label, bool dontShowInGui)
+        {
+            return RunPSCmdletAndReturnFirst<SM.OSImageContext>(new UpdateAzureVMImageCmdletInfo(imageName, label, null, null, dontShowInGui));
         }
 
         public void UpdateAzureVMImage(string imageName, string label, SM.VirtualMachineImageDiskConfigSet diskConfig, string recommendedSize = null)
         {
-            RunPSCmdletAndReturnFirst<ManagementOperationContext>(new UpdateAzureVMImageCmdletInfo(imageName, label, recommendedSize, diskConfig));
+            RunPSCmdletAndReturnFirst<ManagementOperationContext>(new UpdateAzureVMImageCmdletInfo(imageName, label, recommendedSize, diskConfig, null));
         }
 
         public void UpdateAzureVMImage(string imageName, string label, string imageFamily, bool showInGui = false, string recommendedSize = null,
@@ -1461,9 +1469,9 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
 
         #region AzureVNetGateway
 
-        public ManagementOperationContext NewAzureVNetGateway(string vnetName)
+        public GatewayGetOperationStatusResponse NewAzureVNetGateway(string vnetName)
         {
-            return RunPSCmdletAndReturnFirst<ManagementOperationContext>(new NewAzureVNetGatewayCmdletInfo(vnetName));
+            return RunPSCmdletAndReturnFirst<GatewayGetOperationStatusResponse>(new NewAzureVNetGatewayCmdletInfo(vnetName));
         }
 
         public Collection<Microsoft.Azure.Commands.Network.VirtualNetworkGatewayContext> GetAzureVNetGateway(string vnetName)
@@ -1471,28 +1479,28 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Test.FunctionalTests
             return RunPSCmdletAndReturnAll<Microsoft.Azure.Commands.Network.VirtualNetworkGatewayContext>(new GetAzureVNetGatewayCmdletInfo(vnetName));
         }
 
-        public ManagementOperationContext SetAzureVNetGateway(string option, string vnetName, string localNetwork)
+        public GatewayGetOperationStatusResponse SetAzureVNetGateway(string option, string vnetName, string localNetwork)
         {
-            return RunPSCmdletAndReturnFirst<ManagementOperationContext>(new SetAzureVNetGatewayCmdletInfo(option, vnetName, localNetwork));
+            return RunPSCmdletAndReturnFirst<GatewayGetOperationStatusResponse>(new SetAzureVNetGatewayCmdletInfo(option, vnetName, localNetwork));
         }
 
-        public ManagementOperationContext RemoveAzureVNetGateway(string vnetName)
+        public GatewayGetOperationStatusResponse RemoveAzureVNetGateway(string vnetName)
         {
-            return RunPSCmdletAndReturnFirst<ManagementOperationContext>(new RemoveAzureVNetGatewayCmdletInfo(vnetName));
+            return RunPSCmdletAndReturnFirst<GatewayGetOperationStatusResponse>(new RemoveAzureVNetGatewayCmdletInfo(vnetName));
         }
 
-        public Microsoft.Azure.Commands.Network.Gateway.Model.SharedKeyContext GetAzureVNetGatewayKey(string vnetName, string localnet)
+        public SharedKeyContext GetAzureVNetGatewayKey(string vnetName, string localnet)
         {
-            return RunPSCmdletAndReturnFirst<Microsoft.Azure.Commands.Network.Gateway.Model.SharedKeyContext>(new GetAzureVNetGatewayKeyCmdletInfo(vnetName, localnet));
+            return RunPSCmdletAndReturnFirst<SharedKeyContext>(new GetAzureVNetGatewayKeyCmdletInfo(vnetName, localnet));
         }
 
         #endregion
 
         #region AzureVNet
 
-        public Collection<Microsoft.Azure.Commands.Network.Gateway.Model.GatewayConnectionContext> GetAzureVNetConnection(string vnetName)
+        public IEnumerable<GatewayConnectionContext> GetAzureVNetConnection(string vnetName)
         {
-            return RunPSCmdletAndReturnAll<Microsoft.Azure.Commands.Network.Gateway.Model.GatewayConnectionContext>(new GetAzureVNetConnectionCmdletInfo(vnetName));
+            return RunPSCmdletAndReturnFirst<IEnumerable<GatewayConnectionContext>>(new GetAzureVNetConnectionCmdletInfo(vnetName));
         }
 
         public Collection<SM.VirtualNetworkSiteContext> GetAzureVNetSite(string vnetName)
