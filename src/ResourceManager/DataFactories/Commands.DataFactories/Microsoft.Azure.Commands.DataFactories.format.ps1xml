@@ -148,6 +148,10 @@
                 <Label>Properties</Label>
                 <PropertyName>Properties</PropertyName>
               </ListItem>
+              <ListItem>
+                <Label>ProvisioningState</Label>
+                <PropertyName>ProvisioningState</PropertyName>
+              </ListItem>
             </ListItems>
           </ListEntry>
         </ListEntries>
