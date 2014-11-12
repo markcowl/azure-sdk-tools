@@ -77,16 +77,15 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest
 
         private void SetupAzureEnvironmentFromEnvironmentVariables(AzureModule mode)
         {
-            TestEnvironment rdfeEnvironment = new RDFETestEnvironmentFactory().GetTestEnvironment();
-            TestEnvironment csmEnvironment = new CSMTestEnvironmentFactory().GetTestEnvironment();
-            TestEnvironment currentEnvironment = (mode == AzureModule.AzureResourceManager ? csmEnvironment : rdfeEnvironment);
+            TestEnvironment currentEnvironment = (mode == AzureModule.AzureResourceManager ?
+                new CSMTestEnvironmentFactory().GetTestEnvironment() : new RDFETestEnvironmentFactory().GetTestEnvironment());
 
             if (currentEnvironment.UserName == null)
             {
                 currentEnvironment.UserName = "fakeuser@microsoft.com";
             }
 
-            SetAuthenticationFactory(mode, rdfeEnvironment, csmEnvironment);
+            SetAuthenticationFactory(mode, currentEnvironment);
 
             AzureEnvironment environment = new AzureEnvironment { Name = testEnvironmentName };
 
@@ -94,14 +93,13 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest
             environment.Endpoints[AzureEnvironment.Endpoint.ActiveDirectory] = currentEnvironment.Endpoints.AADAuthUri.AbsoluteUri;
             environment.Endpoints[AzureEnvironment.Endpoint.Gallery] = currentEnvironment.Endpoints.GalleryUri.AbsoluteUri;
 
-            if (csmEnvironment != null)
+            if (mode == AzureModule.AzureResourceManager)
             {
-                environment.Endpoints[AzureEnvironment.Endpoint.ResourceManager] = csmEnvironment.BaseUri.AbsoluteUri;                
+                environment.Endpoints[AzureEnvironment.Endpoint.ResourceManager] = currentEnvironment.BaseUri.AbsoluteUri;
             }
-
-            if (rdfeEnvironment != null)
+            else
             {
-                environment.Endpoints[AzureEnvironment.Endpoint.ServiceManagement] = rdfeEnvironment.BaseUri.AbsoluteUri;                
+                environment.Endpoints[AzureEnvironment.Endpoint.ServiceManagement] = currentEnvironment.BaseUri.AbsoluteUri;
             }
 
             if (!client.Profile.Environments.ContainsKey(testEnvironmentName))
@@ -143,33 +141,17 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest
             }
         }
 
-        private void SetAuthenticationFactory(AzureModule mode, TestEnvironment rdfeEnvironment, TestEnvironment csmEnvironment)
+        private void SetAuthenticationFactory(AzureModule mode, TestEnvironment currentEnvironment)
         {
             string jwtToken = null;
             X509Certificate2 certificate = null;
-            TestEnvironment currentEnvironment = (mode == AzureModule.AzureResourceManager ? csmEnvironment : rdfeEnvironment);
-
-            if (mode == AzureModule.AzureServiceManagement)
+            if (currentEnvironment.Credentials is TokenCloudCredentials)
             {
-                if (rdfeEnvironment.Credentials is TokenCloudCredentials)
-                {
-                    jwtToken = ((TokenCloudCredentials)rdfeEnvironment.Credentials).Token;
-                }
-                if (rdfeEnvironment.Credentials is CertificateCloudCredentials)
-                {
-                    certificate = ((CertificateCloudCredentials)rdfeEnvironment.Credentials).ManagementCertificate;
-                }
+                jwtToken = ((TokenCloudCredentials)currentEnvironment.Credentials).Token;
             }
-            else
+            if (currentEnvironment.Credentials is CertificateCloudCredentials)
             {
-                if (csmEnvironment.Credentials is TokenCloudCredentials)
-                {
-                    jwtToken = ((TokenCloudCredentials)csmEnvironment.Credentials).Token;
-                }
-                if (csmEnvironment.Credentials is CertificateCloudCredentials)
-                {
-                    certificate = ((CertificateCloudCredentials)csmEnvironment.Credentials).ManagementCertificate;
-                }
+                certificate = ((CertificateCloudCredentials)currentEnvironment.Credentials).ManagementCertificate;
             }
 
 
